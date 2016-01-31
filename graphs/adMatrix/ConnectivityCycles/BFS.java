@@ -5,6 +5,11 @@ import java.util.Queue;
 
 /**
  * Created by Marc Christen on 27.01.2016.
+ * This program counts the components of
+ * a given graph (adj. matrix) or if it's
+ * connected or not. Additionally it counts
+ * the edges and check if the graph contains
+ * cycles.
  */
 public class BFS {
 
@@ -22,12 +27,13 @@ public class BFS {
         this.numComponents = 0;
         this.queue = new LinkedList<Integer>(); // A queue to process nodes
 
-        // do the graphs.adMatrix.ConnectivityCycles.BFS from each node not already visited
+        // do the BFS from each node not already visited
         for (int i=0; i < adjMatrix.length; ++i)
             if (!visited[i])
             {
                 ++numComponents;
-                System.out.printf("Starting a BFS for component %d starting at node %d%n", numComponents,i);
+                System.out.printf("Starting a BFS for component %d " +
+                        "starting at node %d%n", numComponents,i);
 
                 breadthFirst(i,visited);
             }
@@ -35,10 +41,12 @@ public class BFS {
         System.out.println();
         // Output whether graph (adjMatrix) is connected or not
         if(numComponents > 1){
-            System.out.printf("Finished with BFS - found %d components.%n", numComponents);
+            System.out.printf("Finished with BFS - " +
+                    "found %d components.%n", numComponents);
             System.out.println("Graph is not connected!");
         } else {
-            System.out.printf("Finished with BFS - found %d components.%n", numComponents);
+            System.out.printf("Finished with BFS - " +
+                    "found %d components.%n", numComponents);
             System.out.println("Graph is connected!");
         }
         // Output whether graph (adjMatrix) is cyclic or acyclic
@@ -62,7 +70,8 @@ public class BFS {
             int head = queue.poll(); // get the head of the queue
             System.out.printf("At node %d in the BFS%n", head);
 
-            // add any unseen nodes to the queue to process, then mark them as visited so they don't get re-added
+            // add any unseen nodes to the queue to process,
+            // then mark them as visited so they don't get re-added
             for (int i = 0; i < adjMatrix.length; ++i) {
                 if ((adjMatrix[head][i]) && (!visited[i])) {
                     queue.offer(i);
