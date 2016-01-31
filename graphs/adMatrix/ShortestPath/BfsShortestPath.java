@@ -31,7 +31,7 @@ public class BfsShortestPath {
         this.connectedTo = new int[adjMatrix.length];
         this.parentsQueue = new ArrayDeque<>();
 
-        // do the graphs.adMatrix.ConnectivityCycles.BFS from each node not already visited
+        // do the BFS from each node not already visited
         for (int i=0; i < adjMatrix.length; ++i) {
             if (!visited[i]) {
                 breadthFirst(startVertex, visited);
@@ -48,10 +48,12 @@ public class BfsShortestPath {
         visited[startVertex] = true;
 
         while (!queue.isEmpty()) {
-            int head = queue.poll(); // get the head of the queue (and remove it from the queue)
+            // get the head of the queue (and remove it from the queue)
+            int head = queue.poll();
             System.out.printf("At node %d in the BFS%n", head);
 
-            // add any unseen nodes to the queue to process, then mark them as visited so they don't get re-added
+            // add any unseen nodes to the queue to process,
+            // then mark them as visited so they don't get re-added
             for (int i = 0; i < adjMatrix.length; ++i) {
                 if ((adjMatrix[head][i]) && (!visited[i])) {
                     System.out.printf("Adding node %d to the queue in the BFS%n", i);
